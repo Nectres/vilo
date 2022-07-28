@@ -3,15 +3,17 @@
 	import Footer from '$src/components/Footer.svelte';
 	import GradientText from '$src/components/GradientText.svelte';
 	import { onMount } from 'svelte';
-	
+
 	onMount(() => {
 		const card = document.getElementsByClassName('title-card')[0];
-		const endCard = document.getElementsByClassName('end-card')[0];
+		const endCard = document.getElementsByClassName('end-btn')[0];
 		const fixedBtn = document.getElementsByClassName('fixed-btn')[0];
 
 		fixedBtn.classList.remove('active');
 
 		const endHeight = endCard.getBoundingClientRect().y;
+
+		console.log({ endHeight });
 
 		document.onscroll = () => {
 			console.log(window.scrollY);
@@ -71,7 +73,7 @@
 		<img src="poly-globe.png" alt="Globe" width="300px" />
 	</section>
 
-	<section class="relative end-card w-full p-4" style="background-color: #130048;">
+	<section class="relative w-full p-4" style="background-color: #130048;">
 		<img
 			src="dot_triangle.png"
 			width="120px"
@@ -82,7 +84,9 @@
 			<h1 class="title">Ready to start?</h1>
 			<p>Joining spaces is as easy as swiping.</p>
 			<br />
-			<Button expandOnHover btnColor="white">Start</Button>
+			<div class="end-btn">
+				<Button expandOnHover btnColor="white">Start</Button>
+			</div>
 		</div>
 		<img
 			src="dot_triangle.png"
