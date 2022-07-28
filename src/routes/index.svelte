@@ -1,26 +1,42 @@
 <script>
 	import Button from '$src/components/Button.svelte';
 	import GradientText from '$src/components/GradientText.svelte';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		const card = document.getElementsByClassName('title-card')[0];
+		const fixedBtn = document.getElementsByClassName('fixed-btn')[0];
+
+		fixedBtn.classList.remove('active');
+
+		document.onscroll = () => {
+			if (window.scrollY >= card.scrollHeight) fixedBtn.classList.add('active');
+			else fixedBtn.classList.remove('active');
+		};
+	});
 </script>
 
+<div class="fixed z-50 top-2 right-2 transition-all fixed-btn active">
+	<Button btnColor="blue">Start</Button>
+</div>
 <main>
 	<section class="relative flex justify-center items-center title-card text-white">
-		<img class="absolute top-8 left-8" src="logo.png" alt="vilo" width="50px" />
+		<img class="absolute top-8 left-8" src="vilo_lg.png" alt="vilo" width="50px" />
 		<div class="flex flex-col gap-6 items-center justify-center my-32 mb-24">
-			<h1 class="text-4xl font-bold">Meaningful communities.</h1>
+			<h1 class="title">Meaningful communities.</h1>
 			<p>
 				Find like-minded people to talk to and create meaningful networks of people around the world
 			</p>
 			<Button btnColor="blue" expandOnHover>Start</Button>
 		</div>
 	</section>
-	<section>
+	<section class="content">
 		<img
 			src="https://static.vecteezy.com/system/resources/previews/000/266/247/original/multicultural-communities-vector.jpg"
 			alt="Community"
 			width="550px"
 		/>
-		<div>
+		<div class="center flex-col">
 			<div class="my-8">
 				<span class="text-4xl font-extrabold mx-1"
 					>New opinions. <br /> New <GradientText color1="#FF0F0F" color2="#2300F9"
@@ -33,8 +49,8 @@
 			</p>
 		</div>
 	</section>
-	<section>
-		<div>
+	<section class="content flex-reverse">
+		<div class="center flex-col">
 			<div class="my-8">
 				<span class="mx-1 font-extrabold text-4xl">
 					Go
@@ -46,11 +62,7 @@
 				more diversity in your conversations.
 			</p>
 		</div>
-		<img
-			src="https://kimglobal.com/wp-content/uploads/2020/10/284-1536x1536.jpg"
-			alt="Globe"
-			width="450px"
-		/>
+		<img src="poly-globe.png" alt="Globe" width="300px" />
 	</section>
 </main>
 
@@ -59,13 +71,79 @@
 		background: radial-gradient(147.78% 481.42% at 2.26% 7.34%, #020071 0%, #740000 100%);
 	}
 
-	section:not(.title-card) {
+	img {
+		max-width: 40%;
+	}
+
+	.title {
+		@apply font-bold text-4xl;
+	}
+
+	.fixed-btn {
+		transform: translateY(-100px);
+		transition: 250ms ease-in-out;
+	}
+
+	.flex-reverse {
+		flex-direction: row;
+	}
+	.fixed-btn.active {
+		transform: translateY(0);
+	}
+
+	.content {
 		@apply my-32 flex justify-center gap-24 mx-32 items-center;
+	}
+
+	@media (max-width: 1000px) {
+		img {
+			max-width: 50%;
+		}
+
+		.center {
+			@apply flex justify-center items-center;
+		}
+
+		.content {
+			@apply my-32;
+		}
 	}
 
 	p {
 		max-width: 400px;
 		font-weight: 500;
 		font-size: 18px;
+	}
+
+	@media (max-width: 768px) {
+		.content {
+			@apply flex-col gap-4 mx-10 justify-center items-center;
+		}
+
+		.title {
+			@apply text-2xl;
+		}
+
+		p {
+			max-width: 75%;
+			font-size: 16px;
+		}
+
+		.title-card > p {
+			font-size: 14px;
+			font-weight: 400;
+		}
+
+		.fixed-btn.active {
+			transform: none;
+		}
+
+		.flex-reverse {
+			flex-direction: column-reverse !important;
+		}
+
+		img {
+			max-width: 85%;
+		}
 	}
 </style>
