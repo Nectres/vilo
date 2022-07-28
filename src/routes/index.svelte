@@ -3,17 +3,7 @@
 	import Footer from '$src/components/Footer.svelte';
 	import GradientText from '$src/components/GradientText.svelte';
 	import { onMount } from 'svelte';
-
-	function isInViewport(element: Element) {
-		const rect = element.getBoundingClientRect();
-		return (
-			rect.top >= 0 &&
-			rect.left >= 0 &&
-			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-		);
-	}
-
+	
 	onMount(() => {
 		const card = document.getElementsByClassName('title-card')[0];
 		const endCard = document.getElementsByClassName('end-card')[0];
@@ -21,9 +11,11 @@
 
 		fixedBtn.classList.remove('active');
 
+		const endHeight = endCard.getBoundingClientRect().y;
+
 		document.onscroll = () => {
 			console.log(window.scrollY);
-			if (window.scrollY >= card.scrollHeight - 50 && !isInViewport(endCard))
+			if (window.scrollY >= card.scrollHeight - 50 && window.scrollY < endHeight)
 				fixedBtn.classList.add('active');
 			else fixedBtn.classList.remove('active');
 		};
