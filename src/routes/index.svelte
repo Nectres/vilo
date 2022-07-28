@@ -24,6 +24,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>vilo</title>
+</svelte:head>
+
 <div class="fixed z-50 bottom-2 w-full flex justify-center transition-all fixed-btn active">
 	<Button btnColor="blue" extended>Start your Journey</Button>
 </div>
