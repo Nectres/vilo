@@ -1,27 +1,41 @@
-<script>
+<script lang="ts">
 	import Button from '$src/components/Button.svelte';
+	import Footer from '$src/components/Footer.svelte';
 	import GradientText from '$src/components/GradientText.svelte';
 	import { onMount } from 'svelte';
 
+	function isInViewport(element: Element) {
+		const rect = element.getBoundingClientRect();
+		return (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
+	}
+
 	onMount(() => {
 		const card = document.getElementsByClassName('title-card')[0];
+		const endCard = document.getElementsByClassName('end-card')[0];
 		const fixedBtn = document.getElementsByClassName('fixed-btn')[0];
 
 		fixedBtn.classList.remove('active');
 
 		document.onscroll = () => {
-			if (window.scrollY >= card.scrollHeight) fixedBtn.classList.add('active');
+			console.log(window.scrollY);
+			if (window.scrollY >= card.scrollHeight - 50 && !isInViewport(endCard))
+				fixedBtn.classList.add('active');
 			else fixedBtn.classList.remove('active');
 		};
 	});
 </script>
 
-<div class="fixed z-50 top-2 right-2 transition-all fixed-btn active">
-	<Button btnColor="blue">Start</Button>
+<div class="fixed z-50 bottom-2 w-full flex justify-center transition-all fixed-btn active">
+	<Button btnColor="blue" extended>Start your Journey</Button>
 </div>
 <main>
 	<section class="relative flex justify-center items-center title-card text-white">
-		<img class="absolute top-8 left-8" src="vilo_lg.png" alt="vilo" width="50px" />
+		<img class="absolute top-8 left-8" src="vilo_lg.png" alt="vilo" width="65px" />
 		<div class="flex flex-col gap-6 items-center justify-center my-32 mb-24">
 			<h1 class="title">Meaningful communities.</h1>
 			<p>
@@ -54,7 +68,7 @@
 			<div class="my-8">
 				<span class="mx-1 font-extrabold text-4xl">
 					Go
-					<GradientText color1="#0FFF27" color2="#0081F9">globally.</GradientText></span
+					<GradientText color1="#0FFF27" color2="#0081F9">global.</GradientText></span
 				>
 			</div>
 			<p>
@@ -64,6 +78,29 @@
 		</div>
 		<img src="poly-globe.png" alt="Globe" width="300px" />
 	</section>
+
+	<section class="relative end-card w-full p-4" style="background-color: #130048;">
+		<img
+			src="dot_triangle.png"
+			width="120px"
+			class="dot-img top-4 absolute left-4"
+			alt="triangle"
+		/>
+		<div class="flex text-white gap-2 flex-col justify-center items-center w-full my-24">
+			<h1 class="title">Ready to start?</h1>
+			<p>Joining spaces is as easy as swiping.</p>
+			<br />
+			<Button expandOnHover btnColor="white">Start</Button>
+		</div>
+		<img
+			src="dot_triangle.png"
+			width="120px"
+			class="dot-img bottom-4 absolute right-4"
+			alt="triangle"
+			style="transform: rotate(180deg);"
+		/>
+	</section>
+	<Footer />
 </main>
 
 <style>
@@ -80,8 +117,8 @@
 	}
 
 	.fixed-btn {
-		transform: translateY(-100px);
-		transition: 250ms ease-in-out;
+		transform: translateY(150px);
+		transition: 450ms ease-in-out;
 	}
 
 	.flex-reverse {
@@ -116,6 +153,10 @@
 	}
 
 	@media (max-width: 768px) {
+		.dot-img {
+			width: 20%;
+			max-width: 100px;
+		}
 		.content {
 			@apply flex-col gap-4 mx-10 justify-center items-center;
 		}

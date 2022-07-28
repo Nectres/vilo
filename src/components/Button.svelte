@@ -3,10 +3,11 @@
 	export let btnColor: ButtonColor;
 	export let expandOnHover = false;
 	export let rounded = true;
+	export let extended = false;
 </script>
 
 <button
-	class="px-16 z-20 top-2 sticky py-2 w-fit font-medium text-center {btnColor} transition-all ease-linear"
+	class="px-16 z-20 top-2 sticky py-2 w-fit font-medium text-center {btnColor} transition-all ease-linear" class:px-20={extended}
 	class:hover:scale-105={expandOnHover} class:rounded-lg={rounded}><slot /></button
 >
 
