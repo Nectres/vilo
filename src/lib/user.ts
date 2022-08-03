@@ -1,4 +1,4 @@
-import { readable } from 'svelte/store';
+import { readable, writable } from 'svelte/store';
 import { supabase } from './supabase';
 import type { User } from './types';
 
@@ -22,4 +22,14 @@ async function getUser(): Promise<User> {
     return user;
 }
 
-export const user = readable(await getUser());
+function createUserStore() {
+	const { subscribe, set } = writable(default_user)
+	
+	getUser().then(user => set(user));
+
+	return {
+		subscribe
+	}	
+}
+
+export const user = createUserStore();
