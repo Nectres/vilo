@@ -22,6 +22,8 @@
 			else fixedBtn.classList.remove('active');
 		};
 	});
+
+	const startLink = '/space/hello';
 </script>
 
 <svelte:head>
@@ -29,7 +31,9 @@
 </svelte:head>
 
 <div class="fixed z-50 bottom-2 w-full flex justify-center transition-all fixed-btn active">
-	<Button btnColor="blue" extended>Start your Journey</Button>
+	<a href={startLink}>
+		<Button btnColor="blue" extended>Start your Journey</Button>
+	</a>
 </div>
 <main>
 	<section class="relative flex justify-center items-center title-card text-white">
@@ -39,7 +43,9 @@
 			<p>
 				Find like-minded people to talk to and create meaningful networks of people around the world
 			</p>
-			<Button btnColor="blue" expandOnHover>Start</Button>
+			<a href={startLink}>
+				<Button btnColor="blue" expandOnHover>Start</Button>
+			</a>
 		</div>
 	</section>
 	<section class="content">
@@ -89,7 +95,9 @@
 			<p>Joining spaces is as easy as swiping.</p>
 			<br />
 			<div class="end-btn">
-				<Button expandOnHover btnColor="white">Start</Button>
+				<a href={startLink}>
+					<Button expandOnHover btnColor="white">Start</Button>
+				</a>
 			</div>
 		</div>
 		<img

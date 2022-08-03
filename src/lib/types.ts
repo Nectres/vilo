@@ -1,5 +1,5 @@
 interface Message {
-	user: string;
+	users: User
     created_on: Date;
 	id: string;
 	content: string;
@@ -8,7 +8,7 @@ interface Message {
 interface User {
 	icon: string;
 	name: string;
-    created_on: Date;
+    created_on ?: Date;
 	id: string;
 }
 

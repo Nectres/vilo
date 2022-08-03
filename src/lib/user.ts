@@ -11,7 +11,10 @@ const default_user: User = {
 
 async function getUser(): Promise<User> {
 	const authUser = supabase.auth.user();
-	if (!authUser) return default_user;
+	if (!authUser) {
+		location.href = '/auth/login';
+	return default_user
+}
 	const result = await supabase.from('user').select('*').eq('id', authUser.id);
     if (!result.body) return default_user;
 	let user = result.body[0] as User;

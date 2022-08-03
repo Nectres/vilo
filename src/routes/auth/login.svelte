@@ -13,7 +13,8 @@
 		const access_token = hashParams.get('access_token');
 		console.log(access_token);
 		if (access_token) {
-			const user = supabase.auth.user();
+			const user = supabase.auth.user()
+			console.log(user);
 			const data = user?.identities?.[0]?.identity_data;
 			if (data)
 				await supabase.from('user').insert({
