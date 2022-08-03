@@ -7,3 +7,12 @@
 html, body, button {
     font-family: 'Inter';
 }
+
+.btn {
+   @apply px-10 sm:px-16 py-2 w-fit font-medium text-center;
+}
+
+.btn-blue {
+		background-color: #2522bd;
+		color: #fff;
+}
